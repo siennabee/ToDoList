@@ -28,7 +28,7 @@
     transform: translateX(-50%);
 }
 
-.submit {
+.addTodo {
     background: white;
     color: lightsteelblue;
     border: 2px solid lightsteelblue;
