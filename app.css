@@ -1,0 +1,117 @@
+.title {
+    font-size: 3rem;
+    font-family: 'Amita', serif;
+    font-family: 'Croissant One', serif;
+    font-family: 'Laila', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instructions {
+    font-size: 2rem;
+    font-family: 'Amita', serif;
+    font-family: 'Croissant One', serif;
+    font-family: 'Laila', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#todoItem {
+    display: inline-block;
+    position: relative;
+    margin-left: 50%;
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+}
+
+.submit {
+    background: white;
+    color: lightsteelblue;
+    border: 2px solid lightsteelblue;
+    border-radius: 5px;
+    margin-left: 50%;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    transition: all 300ms;
+}
+
+.submit:hover {
+    color: darkslateblue;
+    border: 2px solid darkslateblue;
+    border-radius: 50px;
+}
+
+.toDoHeader {
+    font-size: 2rem;
+    font-family: 'Amita', serif;
+    font-family: 'Croissant One', serif;
+    font-family: 'Laila', serif;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer {
+    font-family: 'Amita', serif;
+    font-family: 'Croissant One', serif;
+    font-family: 'Laila', serif;
+    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    position: fixed;
+    top: 93%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+li {
+    font-family: 'Amita', serif;
+    font-family: 'Croissant One', serif;
+    font-family: 'Laila', serif;
+    font-family: 'Libre Baskerville', serif;
+    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.complete {
+    background: white;
+    color: green;
+    border: 2px solid green;
+    border-radius: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    transition: all 300ms;
+}
+
+.complete:hover {
+    color: #494949;
+    border: 2px solid #494949;
+    border-radius: 50px;
+    text-decoration: line-through;
+}
+
+.remove {
+    background: white;
+    color: red;
+    border: 2px solid red;
+    border-radius: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    transition: all 300ms;
+}
+
+.remove:hover {
+    color: #494949;
+    border: 2px solid #494949;
+    border-radius: 50px;
+}
