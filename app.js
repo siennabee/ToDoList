@@ -21,6 +21,8 @@ form.addEventListener("submit", function(e){
     const newTodoItem = document.createElement("li");
     const addButtonOne = document.createElement("button");
     const addButtonTwo = document.createElement("button");
+    addButtonOne.classList.add("complete");
+    addButtonTwo.classList.add("remove");
     newTodoItem.innerText = input.value;
     addButtonOne.innerText = "Mark as Complete";
     addButtonTwo.innerText = "Remove";
