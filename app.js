@@ -1,20 +1,29 @@
-const removeButtons = document.getElementsByClassName("remove");
+const removeItem = document.getElementsByClassName("remove");
 const markComplete = document.getElementsByClassName("complete");
 const form = document.querySelector("#addTodoItem");
 const input = document.querySelector("#todoItem");
 const newItem = document.querySelector("#list");
 
-for (let btn of removeButtons) {
-    btn.addEventListener("click", function(e) {
-        e.target.parentElement.remove();
-    });
-}
-
 for (let btn of markComplete) {
     btn.addEventListener("click", function(e) {
         e.target.parentElement.style.textDecoration = "line-through";
     });
-}
+};
+
+for (let btn of removeItem) {
+    btn.addEventListener("click", function(e) {
+        e.target.parentElement.remove();
+    });
+};
+
+newItem.addEventListener("click", function(event) {
+    if (event.target.className === "complete") {
+        event.target.parentElement.style.textDecoration = "line-through";
+    }
+    else if (event.target.className === "remove") {
+        event.target.parentElement.remove();
+    }
+});
 
 form.addEventListener("submit", function(e){
     e.preventDefault();
@@ -30,4 +39,5 @@ form.addEventListener("submit", function(e){
     newTodoItem.appendChild(addButtonTwo);
     input.value = "";
     list.appendChild(newTodoItem);
-})
+});
+
