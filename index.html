@@ -21,7 +21,11 @@
 <body>
     <h1 class="title">Your Favorite To-do List</h1>
     <h2 class="instructions">Add a new item:</h2>
-        <input type="text" id="todoItem" name="todoItem" placeholder="Your to-do item here"></body></html><button class="addTodo">Submit</button>
+        <form id="addTodoItem">
+            <label for="todoItem"></label>
+            <input type="text" id="todoItem" name="todoItem" placeholder="Your to-do item here">
+            <button class="addTodo">Submit</button>
+        </form>
     <h2 class="toDoHeader">Things to do:</h2>
         <ul id="list">
             <li>Here is the first item!<button class="complete">Mark as complete</button><button class="remove">Remove</button></li>

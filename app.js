@@ -1,6 +1,8 @@
 const removeButtons = document.getElementsByClassName("remove");
 const markComplete = document.getElementsByClassName("complete");
-const submitTodo = document.getElementsByClassName("submit");
+const form = document.querySelector("#addTodoItem");
+const input = document.querySelector("#todoItem");
+const newItem = document.querySelector("#list");
 
 for (let btn of removeButtons) {
     btn.addEventListener("click", function(e) {
@@ -14,13 +16,16 @@ for (let btn of markComplete) {
     });
 }
 
-for (let btn of submitTodo) {
-    btn.addEventListener("click", function(e) {
-        e.target.parentElement.style.textDecoration = "line-through";
-    });
-}
-
-input.addEventListener("addTodo", function(e){
+form.addEventListener("submit", function(e){
     e.preventDefault();
-    const newListItem = document.createElement("li");
+    const newTodoItem = document.createElement("li");
+    const addButtonOne = document.createElement("button");
+    const addButtonTwo = document.createElement("button");
+    newTodoItem.innerText = input.value;
+    addButtonOne.innerText = "Mark as Complete";
+    addButtonTwo.innerText = "Remove";
+    newTodoItem.appendChild(addButtonOne);
+    newTodoItem.appendChild(addButtonTwo);
+    input.value = "";
+    list.appendChild(newTodoItem);
 })
