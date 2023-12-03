@@ -4,6 +4,29 @@ const form = document.querySelector("#addTodoItem");
 const input = document.querySelector("#todoItem");
 const newItem = document.querySelector("#list");
 
+let addingLocalStorage = function(){
+    const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+    for (let i = 0; i < savedTodos.length; i++) {
+    let newTodo = document.createElement("li");
+    // let addButtonOne = document.createElement("button");
+    // let addButtonTwo = document.createElement("button");
+    // addButtonOne.classList.add("complete");
+    // addButtonTwo.classList.add("remove");
+    // addButtonOne.innerText = "Mark as Complete";
+    // addButtonTwo.innerText = "Remove";
+    // newTodo.appendChild(addButtonOne);
+    // newTodo.appendChild(addButtonTwo);
+    newTodo.innerText = savedTodos[i].todoItem;
+    newTodo.isCompleted = savedTodos[i].isCompleted ? true : false;
+    if (newTodo.isCompleted) {
+      newTodo.style.textDecoration = "line-through";
+    }
+    newItem.appendChild(newTodo);
+    }
+};
+
+document.addEventListener("DOMContentLoaded", addingLocalStorage());
+
 for (let btn of markComplete) {
     btn.addEventListener("click", function(e) {
         e.target.parentElement.style.textDecoration = "line-through";
@@ -30,26 +53,6 @@ form.addEventListener("submit", function(e){
     newTodoItem.appendChild(addButtonTwo);
     input.value = "";
     newItem.appendChild(newTodoItem);
-    const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
-    for (let i = 0; i < savedTodos.length; i++) {
-    let newTodo = document.createElement("li");
-    // let addButtonOne = document.createElement("button");
-    // let addButtonTwo = document.createElement("button");
-    // addButtonOne.classList.add("complete");
-    // addButtonTwo.classList.add("remove");
-    // addButtonOne.innerText = "Mark as Complete";
-    // addButtonTwo.innerText = "Remove";
-    // newTodo.appendChild(addButtonOne);
-    // newTodo.appendChild(addButtonTwo);
-    newTodo.innerText = savedTodos[i].todoItem;
-    newTodo.isCompleted = savedTodos[i].isCompleted ? true : false;
-    if (newTodo.isCompleted) {
-      newTodo.style.textDecoration = "line-through";
-    }
-    newItem.appendChild(newTodo);
-}
-    
-    e.preventDefault();
     let newTodo = document.createElement("li");
     // let addButtonOne = document.createElement("button");
     // let addButtonTwo = document.createElement("button");
@@ -66,29 +69,10 @@ form.addEventListener("submit", function(e){
     newItem.appendChild(newTodo);
   
     // save to localStorage
+    const savedTodos = JSON.parse(localStorage.getItem("todos"));
     savedTodos.push({ todoItem: newTodo.innerText, isCompleted: false });
-    localStorage.setItem("todos", JSON.stringify(savedTodos));
+    localStorage.setItem("todos", JSON.stringify(savedTodos));  
 });
-
-// retrieve from local storage
-const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
-for (let i = 0; i < savedTodos.length; i++) {
-    let newTodo = document.createElement("li");
-    // let addButtonOne = document.createElement("button");
-    // let addButtonTwo = document.createElement("button");
-    // addButtonOne.classList.add("complete");
-    // addButtonTwo.classList.add("remove");
-    // addButtonOne.innerText = "Mark as Complete";
-    // addButtonTwo.innerText = "Remove";
-    // newTodo.appendChild(addButtonOne);
-    // newTodo.appendChild(addButtonTwo);
-    newTodo.innerText = savedTodos[i].todoItem;
-    newTodo.isCompleted = savedTodos[i].isCompleted ? true : false;
-    if (newTodo.isCompleted) {
-      newTodo.style.textDecoration = "line-through";
-    }
-    newItem.appendChild(newTodo);
-}
 
 newItem.addEventListener("click", function(event) {
     let clickedListItem = event.target;
@@ -106,4 +90,4 @@ newItem.addEventListener("click", function(event) {
         clickedListItem.style.textDecoration = "none";
         clickedListItem.isCompleted = false;
       }
-});
+})
