@@ -8,14 +8,14 @@ let addingLocalStorage = function(){
     const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
     for (let i = 0; i < savedTodos.length; i++) {
     let newTodo = document.createElement("li");
-    // let addButtonOne = document.createElement("button");
-    // let addButtonTwo = document.createElement("button");
-    // addButtonOne.classList.add("complete");
-    // addButtonTwo.classList.add("remove");
-    // addButtonOne.innerText = "Mark as Complete";
-    // addButtonTwo.innerText = "Remove";
-    // newTodo.appendChild(addButtonOne);
-    // newTodo.appendChild(addButtonTwo);
+    let addButtonOne = document.createElement("button");
+    let addButtonTwo = document.createElement("button");
+    addButtonOne.classList.add("complete");
+    addButtonTwo.classList.add("remove");
+    addButtonOne.innerText = "Mark as Complete";
+    addButtonTwo.innerText = "Remove";
+    newTodo.appendChild(addButtonOne);
+    newTodo.appendChild(addButtonTwo);
     newTodo.innerText = savedTodos[i].todoItem;
     newTodo.isCompleted = savedTodos[i].isCompleted ? true : false;
     if (newTodo.isCompleted) {
@@ -25,7 +25,9 @@ let addingLocalStorage = function(){
     }
 };
 
-document.addEventListener("DOMContentLoaded", addingLocalStorage());
+// document.addEventListener("DOMContentLoaded", addingLocalStorage());
+
+addingLocalStorage();
 
 for (let btn of markComplete) {
     btn.addEventListener("click", function(e) {
@@ -53,24 +55,24 @@ form.addEventListener("submit", function(e){
     newTodoItem.appendChild(addButtonTwo);
     input.value = "";
     newItem.appendChild(newTodoItem);
-    let newTodo = document.createElement("li");
-    // let addButtonOne = document.createElement("button");
-    // let addButtonTwo = document.createElement("button");
-    // addButtonOne.classList.add("complete");
-    // addButtonTwo.classList.add("remove");
-    // addButtonOne.innerText = "Mark as Complete";
-    // addButtonTwo.innerText = "Remove";
-    // newTodo.appendChild(addButtonOne);
-    // newTodo.appendChild(addButtonTwo);
-    let taskValue = document.getElementById("todoItem").value;
-    newTodo.innerText = taskValue;
-    newTodo.isCompleted = false;
-    form.reset();
-    newItem.appendChild(newTodo);
+    // let newTodo = document.createElement("li");
+    // // let addButtonOne = document.createElement("button");
+    // // let addButtonTwo = document.createElement("button");
+    // // addButtonOne.classList.add("complete");
+    // // addButtonTwo.classList.add("remove");
+    // // addButtonOne.innerText = "Mark as Complete";
+    // // addButtonTwo.innerText = "Remove";
+    // // newTodo.appendChild(addButtonOne);
+    // // newTodo.appendChild(addButtonTwo);
+    // let taskValue = document.getElementById("todoItem").value;
+    // newTodo.innerText = taskValue;
+    // newTodo.isCompleted = false;
+    // form.reset();
+    // newItem.appendChild(newTodo);
   
     // save to localStorage
-    const savedTodos = JSON.parse(localStorage.getItem("todos"));
-    savedTodos.push({ todoItem: newTodo.innerText, isCompleted: false });
+    const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+    savedTodos.push({ todoItem: newTodoItem.innerText, isCompleted: false });
     localStorage.setItem("todos", JSON.stringify(savedTodos));  
 });
 
