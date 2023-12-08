@@ -21,8 +21,10 @@
 #todoItem {
     display: inline-block;
     position: relative;
+    text-align: center;
     margin-left: 50%;
     margin-bottom: 5px;
+    width: 30%;
     align-items: center;
     justify-content: center;
     transform: translateX(-50%);
@@ -30,8 +32,8 @@
 
 .addTodo {
     background: white;
-    color: lightsteelblue;
-    border: 2px solid lightsteelblue;
+    color: dodgerblue;
+    border: 2px solid dodgerblue;
     border-radius: 5px;
     margin-left: 50%;
     align-items: center;
@@ -65,6 +67,7 @@
     font-family: 'Roboto', sans-serif;
     display: flex;
     position: fixed;
+    /* keep the footer at the bottom of the page */
     top: 93%;
     left: 50%;
     transform: translate(-50%, 50%);
