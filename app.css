@@ -39,10 +39,10 @@
     align-items: center;
     justify-content: center;
     transform: translateX(-50%);
-    transition: all 300ms;
+    transition: all 300ms; 
 }
 
-.submit:hover {
+.addTodo:hover {
     color: darkslateblue;
     border: 2px solid darkslateblue;
     border-radius: 50px;
@@ -57,20 +57,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.footer {
-    font-family: 'Amita', serif;
-    font-family: 'Croissant One', serif;
-    font-family: 'Laila', serif;
-    font-family: 'Playfair Display', serif;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    position: fixed;
-    /* keep the footer at the bottom of the page */
-    top: 93%;
-    left: 50%;
-    transform: translate(-50%, 50%);
 }
 
 li {
@@ -118,4 +104,18 @@ li {
     border: 2px solid #494949;
     border-radius: 50px;
     color: white;
+}
+
+.footer {
+    font-family: 'Amita', serif;
+    font-family: 'Croissant One', serif;
+    font-family: 'Laila', serif;
+    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    position: fixed;
+    /* keep the footer at the bottom of the page */
+    top: 93%;
+    left: 50%;
+    transform: translate(-50%, 50%);
 }
