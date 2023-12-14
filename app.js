@@ -13,12 +13,12 @@ let addingLocalStorage = function(){
     let newTodo = document.createElement("li");
     const itemContent = savedTodos[i].todoItem;
     newTodo.innerHTML = itemContent;
-    newTodo.isCompleted = savedTodos[i].isCompleted ? true : false;
-    newTodo.setAttribute("id", savedTodos[i].id);
+    // newTodo.isCompleted = savedTodos[i].isCompleted ? true : false;
+    // newTodo.setAttribute("id", savedTodos[i].id);
 
-    if (newTodo.isCompleted) {
-        newTodo.style.textDecoration = "line-through";
-    }
+    // if (newTodo.isCompleted) {
+    //     newTodo.style.textDecoration = "line-through";
+    // }
 
     newItem.appendChild(newTodo);
     }
@@ -29,14 +29,14 @@ addingLocalStorage();
 for (let btn of markComplete) {
     btn.addEventListener("click", function(e) {
         e.target.parentElement.style.textDecoration = "line-through";
-        isCompleted = true;
+        // isCompleted = true;
     });
 };
 
 for (let btn of removeItem) {
     btn.addEventListener("click", function(e) {
         e.target.parentElement.remove();
-        isCompleted = true;
+        // isCompleted = true;
         // if (e.target.parent.HTML === savedTodos.target) {
         //     localStorage.removeItem(e.target.parentElement)
         // }
@@ -51,7 +51,7 @@ form.addEventListener("submit", function(e){
     const newTodo = document.createElement("li");
     const addButtonOne = document.createElement("button");
     const addButtonTwo = document.createElement("button");
-    newTodo.setAttribute("id", savedTodos.length + 1);
+    // newTodo.setAttribute("id", savedTodos.length + 1);
     addButtonOne.classList.add("complete");
     addButtonTwo.classList.add("remove");
     newTodo.innerText = input.value;
@@ -64,7 +64,7 @@ form.addEventListener("submit", function(e){
     newItem.appendChild(newTodo);
   
     // save to localStorage
-    savedTodos.push({ id: newTodo.id, input: newTodo.innerHTML, isCompleted: false });
+    savedTodos.push({ todoItem: newTodo.innerHTML, isCompleted: false });
     localStorage.setItem("todos", JSON.stringify(savedTodos));  
 });
 
@@ -78,14 +78,14 @@ newItem.addEventListener("click", function(event) {
         event.target.parentElement.remove();
         event.target.isCompleted = true;
     }
-    // if (!clickedListItem.isCompleted) {
-    //     clickedListItem.style.textDecoration = "line-through";
-    //     clickedListItem.isCompleted = true;
-    //   } 
-    // else {
-    //     clickedListItem.style.textDecoration = "none";
-    //     clickedListItem.isCompleted = false;
-    // }
+    if (!clickedListItem.isCompleted) {
+        clickedListItem.style.textDecoration = "line-through";
+        clickedListItem.isCompleted = true;
+      } 
+    else {
+        clickedListItem.style.textDecoration = "none";
+        clickedListItem.isCompleted = false;
+    }
     // for (let i = 0; i < savedTodos.length; i++) {
     //     if (savedTodos[i].id === clickedListItem.id) {
     //       savedTodos[i].isCompleted = !savedTodos[i].isCompleted;
