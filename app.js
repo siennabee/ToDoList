@@ -1,95 +1,136 @@
-const removeItem = document.getElementsByClassName("remove");
-const markComplete = document.getElementsByClassName("complete");
-const form = document.querySelector("#addTodoItem");
-const input = document.querySelector("#todoItem");
-const newItem = document.querySelector("#list");
+// const removeItem = document.getElementsByClassName("remove");
+// const markComplete = document.getElementsByClassName("complete");
+const form = document.getElementById('addTodoItem');
+const input = document.getElementById('todoItem');
+const todoList = document.querySelector('#list');
 
-// retrieves items from localStorage
+// retrieves items from localStorage or creates an empty array if there are no items
 const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
 // adds localStorage
-let addingLocalStorage = function(){
-    for (let i = 0; i < savedTodos.length; i++) {
-    let newTodo = document.createElement("li");
-    const itemContent = savedTodos[i].todoItem;
-    newTodo.innerHTML = itemContent;
-    // newTodo.isCompleted = savedTodos[i].isCompleted ? true : false;
-    // newTodo.setAttribute("id", savedTodos[i].id);
+for (let i = 0; i < savedTodos.length; i++) {
+    let newTodo = document.createElement('li');
 
-    // if (newTodo.isCompleted) {
-    //     newTodo.style.textDecoration = "line-through";
-    // }
+    // assign the value directly to newTodo.innerText
+    newTodo.innerText = savedTodos[i].todoItem;
 
-    newItem.appendChild(newTodo);
+    // map the isCompleted attribute from localStorage to the newTodo element
+    newTodo.isCompleted = savedTodos[i].isCompleted ? true : false;
+
+    // also map the dynamic id from localStorage to the newTodo element
+    newTodo.setAttribute('id', savedTodos[i].id);
+
+    // checks for each newTodo item, what's the status of isCompleted and applies the appropriate style
+    if (newTodo.isCompleted) {
+        newTodo.style.textDecoration = 'line-through';
     }
-};
 
-addingLocalStorage();
+    //  create the two buttons for each newTodo item and define the event handler.
+    let completeBtn = document.createElement('button');
+    completeBtn.innerText = 'Mark as Complete';
+    completeBtn.classList.add('complete');
+    completeBtn.addEventListener('click', markAsCompleteTodoItem);
 
-for (let btn of markComplete) {
-    btn.addEventListener("click", function(e) {
-        e.target.parentElement.style.textDecoration = "line-through";
-        // isCompleted = true;
-    });
-};
+    let removeBtn = document.createElement('button');
+    removeBtn.innerText = 'Remove';
+    removeBtn.classList.add('remove');
+    removeBtn.addEventListener('click', removeTodoItem);
 
-for (let btn of removeItem) {
-    btn.addEventListener("click", function(e) {
-        e.target.parentElement.remove();
-        // isCompleted = true;
-        // if (e.target.parent.HTML === savedTodos.target) {
-        //     localStorage.removeItem(e.target.parentElement)
-        // }
-        // // loop through savedtodos and find the items that have todoitem key = e.target.parent.HTML
-        // console.log(e.target.parentElement.innerHTML);
-        // console.log(savedTodos);
-    });
-};
+    // append the buttons to the newTodo <li> element.
+    newTodo.appendChild(completeBtn);
+    newTodo.appendChild(removeBtn);
 
-form.addEventListener("submit", function(e){
+    // append the newTodo <li> element to the <ul> element in the DOM.
+    todoList.appendChild(newTodo);
+}
+
+form.addEventListener('submit', function (e) {
     e.preventDefault();
-    const newTodo = document.createElement("li");
-    const addButtonOne = document.createElement("button");
-    const addButtonTwo = document.createElement("button");
-    // newTodo.setAttribute("id", savedTodos.length + 1);
-    addButtonOne.classList.add("complete");
-    addButtonTwo.classList.add("remove");
-    newTodo.innerText = input.value;
-    newTodo.isCompleted = false;
-    addButtonOne.innerText = "Mark as Complete";
-    addButtonTwo.innerText = "Remove";
-    newTodo.appendChild(addButtonOne);
-    newTodo.appendChild(addButtonTwo);
-    input.value = "";
-    newItem.appendChild(newTodo);
-  
-    // save to localStorage
-    savedTodos.push({ todoItem: newTodo.innerHTML, isCompleted: false });
-    localStorage.setItem("todos", JSON.stringify(savedTodos));  
+
+    let newTodo = document.createElement('li');
+
+    // grab the new todo item value from the input field
+    let taskValue = input.value;
+    newTodo.innerText = taskValue; // assign to newTodo item innerText
+    newTodo.isCompleted = false; // set isCompleted to false initially
+
+    // set dynamic id to each list item created
+    let dynamicID = savedTodos.length + 1;
+    newTodo.setAttribute('id', dynamicID);
+
+    let newTodoObject = {
+        id: dynamicID,
+        todoItem: taskValue,
+        isCompleted: false,
+    };
+    // add the new todo object into savedTodos array
+    savedTodos.push(newTodoObject);
+
+    // save to local storage
+    localStorage.setItem('todos', JSON.stringify(savedTodos));
+
+    let completeBtn = document.createElement('button');
+    completeBtn.innerText = 'Mark as Complete';
+    completeBtn.classList.add('complete');
+    completeBtn.addEventListener('click', markAsCompleteTodoItem);
+
+    let removeBtn = document.createElement('button');
+    removeBtn.innerText = 'Remove';
+    removeBtn.classList.add('remove');
+    removeBtn.addEventListener('click', removeTodoItem);
+
+    // append children buttons to new todo item element
+    newTodo.appendChild(completeBtn);
+    newTodo.appendChild(removeBtn);
+
+    // reset the form
+    form.reset();
+
+    // append the new todo item to the DOM.
+    todoList.appendChild(newTodo);
 });
 
-newItem.addEventListener("click", function(event) {
-    let clickedListItem = event.target;
-    if (event.target.className === "complete") {
-        event.target.parentElement.style.textDecoration = "line-through";
-        event.target.isCompleted = true;
+function removeTodoItem(e) {
+    let targetTodoItemId = e.target.parentElement.id;
+
+    // Find the index we need to remove.
+
+    for (let i = 0; i < savedTodos.length; i++) {
+        if (savedTodos[i].id == targetTodoItemId) {
+            // Then use splice to remove the item from the array.
+            savedTodos.splice(i, 1);
+            break; //  exit the loop once we found the matching ID.
+        }
     }
-    else if (event.target.className === "remove") {
-        event.target.parentElement.remove();
-        event.target.isCompleted = true;
+
+    // Save the modified array into your local storage.
+    localStorage.setItem('todos', JSON.stringify(savedTodos));
+
+    // Remove the todo item from the DOM.
+    e.target.parentElement.remove();
+}
+
+function markAsCompleteTodoItem(e) {
+    let targetTodoItem = e.target.parentElement;
+
+    // Modify the DOM styling as per isCompleted status.
+    if (!targetTodoItem.isCompleted) {
+        targetTodoItem.style.textDecoration = 'line-through';
+        targetTodoItem.isCompleted = true;
+    } else {
+        targetTodoItem.style.textDecoration = 'none';
+        targetTodoItem.isCompleted = false;
     }
-    if (!clickedListItem.isCompleted) {
-        clickedListItem.style.textDecoration = "line-through";
-        clickedListItem.isCompleted = true;
-      } 
-    else {
-        clickedListItem.style.textDecoration = "none";
-        clickedListItem.isCompleted = false;
+
+    // Loop through savedTodos array, then check for the matching ID.
+    // If there's matching ID, toggle the isCompleted property of this todo item.
+    // Then overwrite your local storage with the updated list.
+    for (let i = 0; i < savedTodos.length; i++) {
+        // using == because the id in the DOM is a string, but the id in the array is a number.
+        if (savedTodos[i].id == targetTodoItem.id) {
+            savedTodos[i].isCompleted = targetTodoItem.isCompleted;
+            localStorage.setItem('todos', JSON.stringify(savedTodos));
+            break; //  exit the loop once we found the matching ID.
+        }
     }
-    // for (let i = 0; i < savedTodos.length; i++) {
-    //     if (savedTodos[i].id === clickedListItem.id) {
-    //       savedTodos[i].isCompleted = !savedTodos[i].isCompleted;
-    //       localStorage.setItem("todos", JSON.stringify(savedTodos));
-    //     }
-    // };
-});
+}
